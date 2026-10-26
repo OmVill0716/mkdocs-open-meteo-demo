@@ -14,11 +14,20 @@
 
 ## サイト生成ツールを比較する
 
-| 候補 | このデモの要件との照合 |
-| --- | --- |
-| [MkDocs](https://www.mkdocs.org/) | Markdown と `mkdocs.yml` でページを構成し、検索プラグインを使って静的 HTML を生成できる。既存の Python 構成で説明サイトを作り、Swagger UI を同梱して3つの条件を満たせるため採用した。 |
-| [Docusaurus](https://docusaurus.io/docs/) | Markdown/MDX と React を使う静的サイト生成ツール。対話的な React 部品や文書のバージョン管理が必要なら候補になる。今回はその機能を使わず、Node.js の構成も増やさないため採用しなかった。 |
-| [Sphinx](https://www.sphinx-doc.org/en/master/) | 相互参照や複数形式への出力に強い。標準の原稿は reStructuredText で、Markdown は MyST などの拡張で扱う。今回は5ページの Markdown と HTML 公開が中心なので採用しなかった。 |
+### [MkDocs](https://www.mkdocs.org/)（採用）
+
+- **メリット:** Markdown と `mkdocs.yml` でページを構成でき、検索プラグインと静的 HTML 出力を使えます。現在の Python 環境で説明サイトを作れます。
+- **デメリット（今回）:** API を実行するフォームは別途必要です。このデモでは OpenAPI 定義と Swagger UI のファイルも管理します。
+
+### [Docusaurus](https://docusaurus.io/docs/)
+
+- **メリット:** Markdown/MDX と React の部品を使え、文書のバージョン管理にも対応します。画面を大きく作り込む場合に選択肢になります。
+- **デメリット（今回）:** Node.js のビルド環境が必要です。この5ページのデモでは React 部品やバージョン管理を使わず、現在の Python 構成に追加の環境が増えます。
+
+### [Sphinx](https://www.sphinx-doc.org/en/master/)
+
+- **メリット:** 文書間の相互参照、PDF を含む複数形式への出力、コードからの API 文書生成に対応します。
+- **デメリット（今回）:** 標準の原稿は reStructuredText で、Markdown を使うには MyST などの拡張が必要です。このデモでは HTML 公開が中心で、これらの機能を使いません。
 
 この判断は公式資料とこのリポジトリの要件に基づきます。Docusaurus と Sphinx に同じサイトを移植して、表示やビルド時間を実測した比較ではありません。MkDocs が説明ページを、Swagger UI が API 操作を担当する構成を選びました。
 
