@@ -33,4 +33,4 @@ MkDocs が Markdown の説明、ナビゲーション、検索、静的サイト
 
 このサイトは非公式の学習用デモです。データ提供元は [Open-Meteo](https://open-meteo.com/) です。
 
-README・Swagger UI・Qiita 記事との役割の違いや、Markdown の編集からチームでの公開までの流れは [MkDocs のしくみ](mkdocs-workflow.md) にまとめました。
+OpenAPI・Swagger UI の役割、他のサイト生成ツールとの比較、チームでの更新方法は [MkDocs のしくみ](mkdocs-workflow.md) にまとめました。

@@ -2,13 +2,25 @@
 
 このサイトは、Markdown を編集してから静的な HTML を生成する構成です。地名検索と予報の説明、ナビゲーション、検索は MkDocs がまとめ、操作フォームは同梱した Swagger UI が表示します。API の値は Open-Meteo からブラウザへ直接返ります。
 
-## README・Swagger UI・Qiita 記事との役割の違い
+## このデモの選定条件
 
-- **README:** リポジトリの入口とローカル起動方法を案内します。詳しい手順、API の読み方、出典は MkDocs の各ページに置き、メニューと検索から探せるようにします。
-- **Swagger UI:** OpenAPI 定義から入力フォームを表示し、API を実行します。MkDocs の説明ページは地名検索から予報へ進む順番、応答の読み方、確認範囲を補います。
-- **Qiita 記事（下書き）:** デモの狙いと作り方を紹介します。実際に操作する場所と詳しい手順・出典は、このサイトへのリンクで案内します。
+- 手順・API の読み方・出典を Markdown で分けて書き、メニューと検索から探せること。
+- 地名検索と予報の2操作をブラウザ上で実行できること。
+- 生成した静的サイトを GitHub Pages に置き、同じ原稿を別の公開先にも使えること。
 
-この組み合わせで、読む人は「説明を読む → API を試す → 出典と確認範囲を見る」を同じサイトで進められます。MkDocs はサイトの構成と検索を担当し、API の実行は Swagger UI が担当します。
+## OpenAPI と Swagger UI の役割
+
+[OpenAPI 3.0.3](https://spec.openapis.org/oas/v3.0.3.html) は HTTP API の操作や入出力を記述する仕様です。このデモでは `docs/openapi/weather-demo.yaml` に必要な2操作だけを書いています。[Swagger UI](https://swagger.io/open-source/swagger-ui/) はその定義から入力フォームを表示し、ブラウザから API を実行します。手順・出典・検索をまとめるサイトは MkDocs が生成します。
+
+## サイト生成ツールを比較する
+
+| 候補 | このデモの要件との照合 |
+| --- | --- |
+| [MkDocs](https://www.mkdocs.org/) | Markdown と `mkdocs.yml` でページを構成し、検索プラグインを使って静的 HTML を生成できる。既存の Python 構成で説明サイトを作り、Swagger UI を同梱して3つの条件を満たせるため採用した。 |
+| [Docusaurus](https://docusaurus.io/docs/) | Markdown/MDX と React を使う静的サイト生成ツール。対話的な React 部品や文書のバージョン管理が必要なら候補になる。今回はその機能を使わず、Node.js の構成も増やさないため採用しなかった。 |
+| [Sphinx](https://www.sphinx-doc.org/en/master/) | 相互参照や複数形式への出力に強い。標準の原稿は reStructuredText で、Markdown は MyST などの拡張で扱う。今回は5ページの Markdown と HTML 公開が中心なので採用しなかった。 |
+
+この判断は公式資料とこのリポジトリの要件に基づきます。Docusaurus と Sphinx に同じサイトを移植して、表示やビルド時間を実測した比較ではありません。MkDocs が説明ページを、Swagger UI が API 操作を担当する構成を選びました。
 
 ## 1つの原稿からサイトを作る
 
@@ -31,10 +43,8 @@
 
 `--strict` は MkDocs の警告をビルド失敗として扱います。ただし、外部リンクの到達性や Swagger UI からの実通信まで保証するものではありません。
 
-## 記事とチームサイトで使う
-
-Qiita 記事は仕組みと試し方を紹介し、操作や確認範囲の詳しい記録はこのサイトへリンクします。記事とサイトの文章は自動同期していないため、変更時には両方を確認します。
+## 公開先を変えるとき
 
 GitHub Pages や Azure の静的サイト公開先には、同じ `site/` の中身を配置できます。Azure DevOps の Wiki は Markdown を共有する別の表示方式で、このサイトのナビゲーションや Swagger UI をそのまま表示する公開先ではありません。
 
-仕組みの根拠：[MkDocs の設定](https://www.mkdocs.org/user-guide/configuration/)、[文書の書き方](https://www.mkdocs.org/user-guide/writing-your-docs/)、[静的サイトの配置](https://www.mkdocs.org/user-guide/deploying-your-docs/)、[Swagger UI](https://swagger.io/open-source/swagger-ui/)。
+比較の参照元：[OpenAPI 3.0.3](https://spec.openapis.org/oas/v3.0.3.html)、[Swagger UI](https://swagger.io/open-source/swagger-ui/)、[MkDocs](https://www.mkdocs.org/)、[Docusaurus](https://docusaurus.io/docs/)、[Sphinx](https://www.sphinx-doc.org/en/master/)。
