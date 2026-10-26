@@ -2,6 +2,8 @@
 
 MkDocs の Markdown ページから、Swagger UI で Open-Meteo の地名検索と天気予報を試す小さな非公式デモです。Open-Meteo とは無関係です。
 
+公開サイト: [自分の街の天気 API ラボ](https://omvill0716.github.io/mkdocs-open-meteo-demo/)
+
 このデモは、前身の `unofficial-opendrive-api-docs` で使った「利用手順・出典・確認状態を MkDocs でまとめる」構成を、公開 API の小さな題材で示します。OpenDrive の API 資料や実データは含めていません。[MkDocs のしくみ](docs/mkdocs-workflow.md)では、原稿から検索付きサイトを生成し、チームで更新する流れを説明します。
 
 ## 起動
@@ -19,9 +21,9 @@ python3 -m mkdocs serve
 
 同梱ファイルの配布元は [swagger-ui-dist](https://github.com/swagger-api/swagger-ui) です。Apache License 2.0 の本文と配布物のライセンス表示は同じディレクトリに収めています。
 
-Qiita 記事の下書きは [qiita-draft.md](qiita-draft.md) です。公開前にサイトの表示と API の応答を再確認してください。
+Qiita 記事の下書きは [qiita-draft.md](qiita-draft.md) です。記事は未投稿です。
 
-GitHub Pages に手動デプロイする Workflow と、Azure Pipelines で `site/` を成果物にする定義を用意しました。公開前の確認事項は [PUBLISHING.md](PUBLISHING.md) にまとめています。どちらも push だけでは起動しません。
+GitHub Pages に手動デプロイする Workflow と、Azure Pipelines で `site/` を成果物にする定義を用意しました。公開・更新の確認事項は [PUBLISHING.md](PUBLISHING.md) にまとめています。どちらも push だけでは起動しません。
 
 別セッションで続ける場合は、まず [AGENTS.md](AGENTS.md) の未検証事項を確認してください。
 

@@ -1,6 +1,6 @@
-# ビルドと公開前の確認
+# ビルドと公開・更新時の確認
 
-このデモの公開作業は未実施です。編集元は `docs/` と `mkdocs.yml`、どの静的サイト公開先にも渡せる生成物は `site/` です。GitHub Pages と Qiita への公開は、内容と表示を確認してから行います。
+このデモは [GitHub Pages](https://omvill0716.github.io/mkdocs-open-meteo-demo/) で公開済みです。編集元は `docs/` と `mkdocs.yml`、どの静的サイト公開先にも渡せる生成物は `site/` です。更新時も、内容と表示を確認してからデプロイします。Qiita 記事は未投稿です。
 
 1. `python3 -m mkdocs serve` でローカルサイトを開く。
 2. Swagger UI の `GET /v1/search` と `GET /v1/forecast` で、東京と任意のもう1都市を実行する。実行前にプレビューするリクエスト URL が `geocoding-api.open-meteo.com`、`api.open-meteo.com` を指すか確認する。
@@ -8,13 +8,15 @@
 4. `python3 -m mkdocs build --strict` を実行し、生成した `site/` のページと静的ファイルを確認する。
 5. 公開時点の [Open-Meteo の無料 API 利用条件](https://open-meteo.com/en/terms)と出典表示を再確認する。
 
-2026年10月26日のローカル確認では、Chrome のページ内フォームで東京の検索・予報が HTTP 200、別画面で札幌の検索・予報が HTTP 200 でした。札幌では3日分と華氏を指定し、応答の日付配列と単位が変わりました。幅390pxの別画面からも検索を実行でき、横スクロールはありませんでした。公開 URL では上記 2 と 3 を再確認します。
+2026年10月26日のローカル確認では、Chrome のページ内フォームで東京の検索・予報が HTTP 200、別画面で札幌の検索・予報が HTTP 200 でした。札幌では3日分と華氏を指定し、応答の日付配列と単位が変わりました。幅390pxの別画面からも検索を実行でき、横スクロールはありませんでした。
+
+同日の公開 URL でも、ページ内フォームで東京の検索・予報が HTTP 200、別画面で東京と札幌の検索・予報が HTTP 200 でした。札幌の3日分・華氏は応答に反映され、幅390pxの別画面で検索を実行できました。横スクロールもありませんでした。[Open-Meteo の利用条件](https://open-meteo.com/en/terms)、[予報](https://open-meteo.com/en/docs)、[地名検索](https://open-meteo.com/en/docs/geocoding-api)の公式資料も再確認しました。
 
 ## GitHub Pages
 
-1. 新しい公開リポジトリにこのディレクトリのソースを置き、GitHub の Settings → Pages → Build and deployment → Source を **GitHub Actions** にする。
-2. Actions の `Deploy MkDocs to GitHub Pages` を手動実行し、公開 URL から上記 2 と 3 を再確認する。
-3. [qiita-draft.md](qiita-draft.md) に公開 URL を加え、記事の表現・リンク・出典を見直してから投稿する。
+公開リポジトリは [OmVill0716/mkdocs-open-meteo-demo](https://github.com/OmVill0716/mkdocs-open-meteo-demo) です。Pages の Source は **GitHub Actions** です。2026年10月26日の[初回デプロイ](https://github.com/OmVill0716/mkdocs-open-meteo-demo/actions/runs/40284603215)は成功しました。
+
+更新時は Actions の `Deploy MkDocs to GitHub Pages` を `main` から手動実行し、公開 URL で上記 2 と 3 を再確認します。[qiita-draft.md](qiita-draft.md) に公開 URL を記載済みです。記事は表現・リンク・出典を見直してから投稿します。
 
 GitHub Pages の手順は[GitHub の公式資料](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)を参照。Workflow は `workflow_dispatch` のみで起動するため、リポジトリへ push しただけでは公開されません。
 

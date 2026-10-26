@@ -4,6 +4,8 @@
 
 この記事で扱うサイトは Open-Meteo の非公式デモです。仕様と利用条件の正本は公式資料を参照してください。
 
+**公開サイト:** [自分の街の天気 API ラボ](https://omvill0716.github.io/mkdocs-open-meteo-demo/)（[ソースコード](https://github.com/OmVill0716/mkdocs-open-meteo-demo)）
+
 ## 完成形でできること
 
 1. `Tokyo` や `Sapporo` を検索し、候補の緯度・経度を得る
@@ -151,6 +153,6 @@ Qiita 記事自体に任意の Swagger UI iframe を埋め込む形にはせず�
 
 予報フォームの `forecast_days` を `3` にすれば日ごとの配列が3日分になり、`temperature_unit` を `fahrenheit` にすれば気温と単位が変わります。Swagger UI では入力値、送信 URL、応答を続けて確認できます。
 
-2026年10月26日に、東京の地名検索と `timezone=auto` を使う予報 API から HTTP 200 と必要な項目が返ること、両エンドポイントがブラウザ向けの CORS ヘッダを返すことを確認しました。ユーザーが起動したローカルの MkDocs サイトを Chrome で開き、ページ内の Swagger UI から東京の2操作を Execute して HTTP 200 を確認しました。別画面では札幌の検索・予報と、3日分・華氏への変更も確認しました。幅390pxの別画面でも検索を実行でき、横スクロールはありませんでした。MkDocs の `build --strict` も通っています。公開 URL での表示と Execute は未検証です。
+2026年10月26日に、東京の地名検索と `timezone=auto` を使う予報 API から HTTP 200 と必要な項目が返ること、両エンドポイントがブラウザ向けの CORS ヘッダを返すことを確認しました。ローカルと公開サイトのページ内 Swagger UI から東京の2操作を Execute し、HTTP 200 を確認しました。公開サイトの別画面では東京・札幌の検索と予報も HTTP 200 で、札幌の3日分・華氏への変更が応答に反映されました。幅390pxの別画面でも検索を実行でき、横スクロールはありませんでした。MkDocs の `build --strict` も通っています。Open-Meteo の[利用条件](https://open-meteo.com/en/terms)と[API 資料](https://open-meteo.com/en/docs)は同日に再確認しました。
 
 データ提供元は [Open-Meteo](https://open-meteo.com/) です。利用条件と出典表示は公式サイトを確認してください。
