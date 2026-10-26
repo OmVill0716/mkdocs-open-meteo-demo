@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com; worker-src 'self' blob:; base-uri 'none'; form-action 'none'">
+  <title>Swagger で試す | 自分の街の天気 API ラボ</title>
+  <link rel="stylesheet" href="../assets/vendor/swagger-ui/swagger-ui.css">
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; }
+    .intro { max-width: 1100px; margin: 1rem auto 0; padding: 0 1.2rem; line-height: 1.6; }
+    .intro h1 { margin: .2rem 0; font-size: 1.5rem; }
+    .intro p { margin: .3rem 0; }
+    .intro a { color: #145c94; }
+    #swagger-ui { max-width: 1200px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <h1>地名検索 → 天気予報</h1>
+    <p>各操作の「Try it out」から値を入力し、「Execute」で Open-Meteo に送信します。<a href="../try-it/">手順に戻る</a> · <a href="../openapi/weather-demo.yaml">OpenAPI 定義</a></p>
+    <p>無料 API は非商用利用向けです。<a href="https://open-meteo.com/en/terms">利用条件</a>と出典表示を確認してください。</p>
+  </header>
+  <main id="swagger-ui" aria-label="Open-Meteo API の Swagger UI"></main>
+  <script src="../assets/vendor/swagger-ui/swagger-ui-bundle.js"></script>
+  <script src="../assets/swagger-demo.js"></script>
+</body>
+</html>

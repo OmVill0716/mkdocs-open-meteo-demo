@@ -1,0 +1,17 @@
+site_name: 自分の街の天気 API ラボ
+site_description: MkDocs と Swagger UI で Open-Meteo を試す非公式デモ
+theme:
+  name: mkdocs
+  locale: ja
+plugins:
+  - search
+markdown_extensions:
+  - attr_list
+extra_css:
+  - assets/site.css
+nav:
+  - はじめに: index.md
+  - Swagger で試す: try-it.md
+  - API の読み方: api-guide.md
+  - MkDocs のしくみ: mkdocs-workflow.md
+  - 出典と確認範囲: sources.md

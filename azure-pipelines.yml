@@ -1,0 +1,25 @@
+# 手動実行で MkDocs の静的サイトをビルドし、成果物として保存する。
+# 公開先へのデプロイは含めない。
+trigger: none
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.11'
+    displayName: Python 3.11 を選択
+
+  - script: python -m pip install -r requirements.txt
+    displayName: MkDocs をインストール
+
+  - script: python -m mkdocs build --strict
+    displayName: 静的サイトを検証・生成
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(System.DefaultWorkingDirectory)/site'
+      artifact: 'mkdocs-site'
+    displayName: 生成サイトを成果物として保存

@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: 自分の街の天気 API ラボ
+  version: 0.1.0
+  description: >-
+    Open-Meteo の地名検索と予報を試すための非公式・部分的な定義。
+    無料 API は非商用利用向けです。仕様と利用条件の正本は Open-Meteo の公式資料です。
+  contact:
+    name: Open-Meteo 公式資料
+    url: https://open-meteo.com/en/docs
+externalDocs:
+  description: Open-Meteo 公式資料
+  url: https://open-meteo.com/en/docs
+tags:
+  - name: '1. 地名検索'
+    description: 街の名前から緯度と経度を取得します。
+  - name: '2. 天気予報'
+    description: 緯度と経度を使って今日の天気を取得します。
+paths:
+  /v1/search:
+    servers:
+      - url: https://geocoding-api.open-meteo.com
+    get:
+      tags: ['1. 地名検索']
+      summary: 街を検索する
+      operationId: searchCity
+      externalDocs:
+        description: Geocoding API 公式資料
+        url: https://open-meteo.com/en/docs/geocoding-api
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: 街の名前。Tokyo や Sapporo などを入力します。
+          schema:
+            type: string
+            default: Tokyo
+        - name: count
+          in: query
+          description: 最大候補数。
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 3
+        - name: language
+          in: query
+          description: 結果の表示言語。
+          schema:
+            type: string
+            default: ja
+        - name: countryCode
+          in: query
+          description: 国で絞り込む場合の2文字コード。例：JP。
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 2
+      responses:
+        '200':
+          description: 地名候補。該当する街がない場合、results がないことがあります。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name: { type: string }
+                        latitude: { type: number }
+                        longitude: { type: number }
+                        country: { type: string }
+                        admin1: { type: string }
+                        timezone: { type: string }
+        '400':
+          description: 入力値が不正です。
+  /v1/forecast:
+    servers:
+      - url: https://api.open-meteo.com
+    get:
+      tags: ['2. 天気予報']
+      summary: 今日の天気を取得する
+      operationId: getForecast
+      externalDocs:
+        description: Weather Forecast API 公式資料
+        url: https://open-meteo.com/en/docs
+      parameters:
+        - name: latitude
+          in: query
+          required: true
+          description: 地名検索の results[].latitude を入力します。初期値は東京都付近。
+          schema:
+            type: number
+            minimum: -90
+            maximum: 90
+            default: 35.6895
+        - name: longitude
+          in: query
+          required: true
+          description: 地名検索の results[].longitude を入力します。初期値は東京都付近。
+          schema:
+            type: number
+            minimum: -180
+            maximum: 180
+            default: 139.69171
+        - name: current
+          in: query
+          description: 現在値として取得する項目。カンマ区切り。
+          schema:
+            type: string
+            default: temperature_2m,precipitation
+        - name: daily
+          in: query
+          description: 日別予報として取得する項目。カンマ区切り。
+          schema:
+            type: string
+            default: temperature_2m_max,precipitation_probability_max
+        - name: timezone
+          in: query
+          required: true
+          description: 日付の区切りに使うタイムゾーン。auto は座標に合わせて選びます。
+          schema:
+            type: string
+            default: auto
+        - name: forecast_days
+          in: query
+          description: 取得日数。初期値は今日の1日分。
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 16
+            default: 1
+        - name: temperature_unit
+          in: query
+          description: 気温の単位。変えると current_units と daily_units も変わります。
+          schema:
+            type: string
+            enum: [celsius, fahrenheit]
+            default: celsius
+      responses:
+        '200':
+          description: 現在値と今日の予報。値と単位は応答で確認してください。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timezone: { type: string }
+                  current_units: { type: object }
+                  current:
+                    type: object
+                    properties:
+                      time: { type: string }
+                      temperature_2m: { type: number }
+                      precipitation: { type: number }
+                  daily_units: { type: object }
+                  daily:
+                    type: object
+                    properties:
+                      time:
+                        type: array
+                        items: { type: string }
+                      temperature_2m_max:
+                        type: array
+                        items: { type: number }
+                      precipitation_probability_max:
+                        type: array
+                        items: { type: number }
+        '400':
+          description: 入力値が不正です。
