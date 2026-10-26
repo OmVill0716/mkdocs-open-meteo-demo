@@ -30,12 +30,12 @@ MkDocs の説明ページと Azure Pipelines の手動ビルド定義を追加�
 - 2026-10-26、地名検索と `timezone=auto` の予報を直接 GET で再確認。両 API は HTTP 200、必要な項目、`Access-Control-Allow-Origin: *` を返した。無料 API の非商用条件、回数制限、出典表示は公式 Terms で確認した。
 - 2026-10-26、ユーザーが起動した `http://127.0.0.1:8000/` を Chrome で確認。MkDocs ページ内の Swagger UI から東京の地名検索と予報を Execute し、両方 HTTP 200。別画面では東京と札幌の検索・予報、札幌の3日分と華氏を HTTP 200 で確認した。幅390pxでは別画面の検索を Execute し、HTTP 200 と横スクロールがないことを確認した。公開 URL での動作は未検証。
 - Codex のサンドボックス内では待ち受けソケットの `bind` が `PermissionError` になった。ユーザーが許可された環境でサーバーを起動したためブラウザ検証ができた。ポリシーを迂回しないこと。
-- 既存の `unofficial-opendrive-api-docs` リポジトリは変更していない。このデモは 2026-10-26 にローカルで Git リポジトリ化した。GitHub Pages デプロイと Qiita 投稿はまだ行っていない。
+- 既存の `unofficial-opendrive-api-docs` リポジトリは変更していない。このデモは 2026-10-26 に Git リポジトリ化し、公開リポジトリ `OmVill0716/mkdocs-open-meteo-demo` の `main` へプッシュした。GitHub Pages デプロイと Qiita 投稿はまだ行っていない。
 
 ## 次の順序
 
 1. Azure DevOps 側の用途（静的サイト公開、Wiki、Pipeline Artifact）を確定し、必要な公開先固有の設定を作る。
-2. GitHub リポジトリの接続先と可視性を確認する。GitHub Pages／Azure 側のデプロイ・Qiita 投稿の前に、ユーザー提供の AGENTS.md 規範にある最終確認を取る。
+2. GitHub Pages／Azure 側のデプロイ・Qiita 投稿の前に、ユーザー提供の AGENTS.md 規範にある最終確認を取る。
 3. 公開 URL が得られたら、同じ2操作とスマートフォン幅を再確認し、`qiita-draft.md` にリンクを加え、出典と利用条件を見直す。詳細は `PUBLISHING.md`。
 
 Open-Meteo の仕様は [Forecast 公式資料](https://open-meteo.com/en/docs)と[Geocoding 公式資料](https://open-meteo.com/en/docs/geocoding-api)で再確認する。Qiita 記事に任意の Swagger iframe を直接埋め込む前提にはしない。
